@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- عشان يظبط على الموبايل -->
+<title>{% block title %}A&N Driving Academy{% endblock %}</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Tahoma, sans-serif;
+        background: #f8f9fa;
+    }
+
+    /* ✅ Top Bar */
+    .top-bar {
+        background-color: rgba(38, 50, 56, 0.9);
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 102;
+    }
+    .top-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .top-left img {
+        width: 50px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .top-left h1 {
+        font-size: 18px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    /* ✅ Links container */
+    .top-links {
+        display: flex;
+        gap: 10px;
+    }
+    .top-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        background: #388e3c;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: 0.3s;
+        display: inline-block;
+    }
+    .top-links a:hover {
+        background: #2e7d32;
+        transform: scale(1.05);
+    }
+
+    /* ✅ Hamburger menu button (موبايل) */
+    .menu-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+        background: #388e3c;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 768px) {
+        .top-links {
+            display: none; /* اختفاء اللينكات */
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 15px;
+            background: rgba(38, 50, 56, 0.95);
+            padding: 10px;
+            border-radius: 10px;
+            width: auto;
+            min-width: 180px;
+        }
+        .top-links.show {
+            display: flex; /* إظهار القائمة لما يضغط على زرار المنيو */
+        }
+        .menu-toggle {
+            display: block; /* زرار المنيو يظهر على الموبايل */
+        }
+    }
+
+    /* Page content padding */
+    .main-content {
+        padding: 120px 20px 20px;
+        min-height: 70vh;
+    }
+</style>
+
+{% block styles %}{% endblock %}
+</head>
+<body>
+
+<!-- ✅ Topbar -->
+<div class="top-bar">
+    <div class="top-left">
+        <a href="/home">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="شعار الأكاديمية">
+        </a>
+    </div>
+
+    <!-- زرار المنيو (موبايل) -->
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- اللينكات -->
+    <div class="top-links" id="menu">
+        <a href="/home#contact"> تواصل معنا</a>
+        <a href="/reviews"> آراء العملاء</a>
+        <a href="/offers"> العروض الحالية للكورسات</a>
+        <a href="/home"> الصفحة الرئيسية</a>
+    </div>
+</div>
+
+<!-- Page Content -->
+<div class="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+    function toggleMenu() {
+        document.getElementById("menu").classList.toggle("show");
+    }
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>
