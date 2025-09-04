@@ -4,6 +4,7 @@ from datetime import timedelta
 import mysql.connector
 from mysql.connector import pooling
 from flask import Flask,render_template,redirect,request,url_for
+import bcrypt
 from werkzeug.utils import secure_filename
 from db_config import get_connection
 app = Flask(__name__)
