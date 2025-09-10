@@ -265,7 +265,7 @@ def booking():
                     total_manual_sessions= cursor.fetchone()[0]
                     cursor.execute("select count(*) from automatic_sessions_per_client where id=%s",(clients_id,))
                     total_automatic_sessions= cursor.fetchone()[0]
-                    if total_manual_sessions <3 and total_automatic_sessions ==0:
+                    if total_manual_sessions <3 and total_automatic_sessions <3:
                         if start_date_1<start_date_1_2:
                             return redirect("/manual_booking")
                         else:
@@ -870,6 +870,11 @@ def cancel_booking_2():
             return redirect(f"/{session_type}_booking_2")
     except Exception as e:
         return f"An error occurred: {e}"
+
+@app.route("/cancel_tibooking")
+def cancel_tibooking():
+    return render_template("cancel_tibooking.html")
+
 @app.route("/clients_data")
 def clients_data():
     conn = None
