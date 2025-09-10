@@ -60,7 +60,7 @@
                 {% else %}
                     <img src="{{ review.file_path }}" alt="صورة العميل">
                 {% endif %}
-                <p>{{ review.caption if review.caption else "لا يوجد وصف" }}</p>
+                <p>{{ review.caption if review.caption else "" }}</p>
                 <small>📅 {{ review.publish_date }}</small>
                 <small> {{ review.id }}</small>
             </div>
